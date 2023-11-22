@@ -28,7 +28,8 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.todo"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .pathMapping("/");
     }
 
     private ApiInfo apiInfo() {

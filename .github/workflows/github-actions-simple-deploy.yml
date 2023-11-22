@@ -24,6 +24,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Start MariaDB
+        uses: getong/mariadb-action@v1.1
+
       - name: Run build with Gradle Wrapper
         run: ./gradlew build
 

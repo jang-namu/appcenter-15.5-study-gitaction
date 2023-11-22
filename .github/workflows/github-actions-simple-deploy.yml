@@ -1,10 +1,10 @@
-name: CI/CD
+gname: CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -21,16 +21,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Setup MariaDB
-        uses: getong/mariadb-action@v1.1
-        with:
-          character set server: 'utf8'
-          mariadb version: '10.6.14'
-          mysql database: 'todolist_ch'
-          mysql root password: ${{ secrets.ROOT_PASSWORD }}
-          mysql user: 'cheolhui'
-          mysql password: ${{ secrets.PASSWORD }}
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -40,20 +30,20 @@ jobs:
       - name: Send file to the server
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST_GCP }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          source: "./build/libs/*.jar"
-          target: download
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USER }}
+            password: ${{ secrets.PASSWORD }}
+            port: ${{ secrets.PORT }}
+            source: "./build/libs/*.jar"
+            target: download
 
       - name: Deploy remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST_GCP }}
+          host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script:
+          script: |
             sh deploy/deploy.sh

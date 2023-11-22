@@ -24,17 +24,18 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Start MariaDB
-        uses: getong/mariadb-action@v1.1
-	with:
-	  mariadb version: '10.6.14''
-	  mysql database: 'todolist_ch
-	  mysql root password: ${{ secrets.ROOT_PASSWORD }}
-	  mysql user: ${{ secrets.USER }}
-	  mysql password: ${{ secrets.PASSWORD }}
-
       - name: Run build with Gradle Wrapper
         run: ./gradlew build
+
+      - name: Setup MariaDB
+        uses: getong/mariadb-action@v1.1
+        with:
+          character set server: 'utf8'
+          mariadb version: '10.6.14'
+          mysql database: 'todolist_ch'
+          mysql root password: ${{ secrets.ROOT_PASSWORD }}
+          mysql user: 'cheolhui'
+          mysql password: ${{ secrets.PASSWORD }}
 
       - name: Send file to the server
         uses: appleboy/scp-action@master

@@ -26,6 +26,12 @@ jobs:
 
       - name: Start MariaDB
         uses: getong/mariadb-action@v1.1
+	with:
+	  mariadb version: '10.6.14''
+	  mysql database: 'todolist_ch
+	  mysql root password: ${{ secrets.ROOT_PASSWORD }}
+	  mysql user: ${{ secrets.USER }}
+	  mysql password: ${{ secrets.PASSWORD }}
 
       - name: Run build with Gradle Wrapper
         run: ./gradlew build

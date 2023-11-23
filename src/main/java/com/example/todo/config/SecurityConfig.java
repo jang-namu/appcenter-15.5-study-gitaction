@@ -18,10 +18,12 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        /*
         http.authorizeRequests()
                 .anyRequest()
                 .permitAll();
         http.formLogin();
+        */
 
         /*
         주의! csrf 비활성화.

@@ -1,39 +1,18 @@
 package com.example.todo.user;
 
+import com.example.todo.common.MariaDBTestContainer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.testcontainers.containers.MariaDBContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class UserRepositoryTest {
-
-
-    @Container
-    private static final MariaDBContainer<?> mysqlContainer = new MariaDBContainer<>("mariadb:10.6.16");
-
-    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            TestPropertyValues.of(
-                    "spring.datasource.url=" + mysqlContainer.getJdbcUrl(),
-                    "spring.datasource.username=" + mysqlContainer.getUsername(),
-                    "spring.datasource.password=" + mysqlContainer.getPassword()
-            ).applyTo(configurableApplicationContext.getEnvironment());
-        }
-    }
-
+class UserRepositoryTest extends MariaDBTestContainer {
 
     @Autowired
     private UserRepository userRepository;

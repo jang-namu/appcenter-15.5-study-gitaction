@@ -6,16 +6,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @ApiModel("User 요청 DTO")
 @Getter
 public class UserRequestDto {
 
     @Positive(groups = { RUDValidationGroup.class})
+    @Null
     @ApiModelProperty(value = "User 식별자", notes = "Long 타입의 정수값")
     private Long userId;
 

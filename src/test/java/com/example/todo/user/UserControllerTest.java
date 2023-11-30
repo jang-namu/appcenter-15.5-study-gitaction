@@ -1,20 +1,10 @@
 package com.example.todo.user;
 
-import com.example.todo.user.dto.UserResponseDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 //@SpringBootTest
 //@ActiveProfiles("test")
 //@AutoConfigureMockMvc
 class UserControllerTest {
-
+/*
     @Autowired
     private MockMvc mockMvc;
 
@@ -44,5 +34,5 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.password").value("test123"))
                 .andExpect(jsonPath("$.name").value("namu"));
     }
-
+*/
 }

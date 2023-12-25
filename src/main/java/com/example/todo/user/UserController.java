@@ -36,6 +36,19 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDto);
     }
 
+    @PostMapping("/login")
+    @ApiOperation(value = "User 로그인 api", notes = "loginId, password 로그인")
+    public ResponseEntity<UserResponseDto> loginUser(
+            @RequestBody UserRequestDto userRequestDto) {
+        UserResponseDto userResponseDto;
+        try {
+            userResponseDto = userService.loginUser(userRequestDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(userResponseDto);
+    }
+
     @DeleteMapping("/{userId}")
     @ApiOperation(value = "기존 유저 정보 삭제 api", notes = "회원 탈퇴 등 유저 정보 삭제")
     public void deleteUser(@ApiParam(value = "User 식별자", required = true) @PathVariable Long userId) {

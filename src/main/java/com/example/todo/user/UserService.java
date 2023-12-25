@@ -26,6 +26,15 @@ public class UserService {
         return savedUser.toResponseDto();
     }
 
+    public UserResponseDto loginUser(UserRequestDto userRequestDto) throws Exception {
+        User user = userRepository.findByLoginId(userRequestDto.getLoginId())
+                .orElseThrow(() -> new Exception("해당하는 User 엔티티를 찾을 수 없습니다."));
+        if (!user.getPassword().equals(userRequestDto.getPassword())) {
+            throw new Exception("로그인 정보가 일치하지 않습니다.");
+        }
+        return user.toResponseDto();
+    }
+
 
     private UserResponseDto updateAndSaveUserFromDto(User user, UserRequestDto userRequestDto) {
         user.updateFromDto(userRequestDto);
